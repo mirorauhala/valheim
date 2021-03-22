@@ -1,0 +1,26 @@
+version: "3"
+services:
+  valheim:
+    image: mbround18/valheim:latest
+    restart: always
+    ports:
+      - 2456:2456/udp
+      - 2457:2457/udp
+      - 2458:2458/udp
+    environment:
+      - PORT=2456
+      - NAME="ReportedAlready Valheim"
+      - WORLD="Dedicated"
+      - PASSWORD="kissa123"
+      - TZ=Europe/Helsinki
+      - PUBLIC=1
+      - AUTO_BACKUP=1
+      - AUTO_BACKUP_SCHEDULE="30 6 * * 1" # weekly, on mondays @ 6:30 in morning
+      - AUTO_BACKUP_REMOVE_OLD=1
+      - AUTO_BACKUP_DAYS_TO_LIVE=100
+      - AUTO_BACKUP_ON_SHUTDOWN=1
+      - WEBHOOK_URL="https://discord.com/api/webhooks/821758533464490035/5sM4_4MMHSqXR08nGwJmIMUtNhhKUxUrIpgjfB7RC9NDo4J06h6srOplapusKivbhejo"
+    volumes:
+    - ./saves:/home/steam/.config/unity3d/IronGate/Valheim
+    - ./server:/home/steam/valheim
+    - ./backups:/home/steam/backups
